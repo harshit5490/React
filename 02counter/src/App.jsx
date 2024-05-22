@@ -5,17 +5,24 @@ import './App.css'
 
 function App() {
   let [counter,setCounter] = useState(15);
+  console.log('rendering');
   // let counter = 15;
   const addValue = () =>{
-    // counter = counter + 1;
-    if(counter === 20){
-      counter = 20;
-      setCounter(counter);
-    }
-    else{
-      counter = counter + 1;
-      setCounter(counter);
-    }
+    counter = counter + 1;
+    setCounter(counter);
+    counter++;
+    setCounter(counter);
+    counter++;
+    setCounter(counter)
+    // if(counter === 20){
+    //   counter = 20;
+    //   setCounter(counter);
+    // }
+    // else{
+    //   counter = counter + 1;
+    //   setCounter(counter);
+    // }
+
     
     // console.log(Math.random())
   }
