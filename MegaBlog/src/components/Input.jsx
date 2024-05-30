@@ -24,3 +24,5 @@ const Input = forwardRef(function Input({
         </div>
     )
 })
+
+export default Input
