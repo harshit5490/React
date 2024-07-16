@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import appwriteService from "../appwrite/config ";
+import appwriteService from "../appwrite/config";
 import { Container, Button } from "../components";
 import { Link,useNavigate,useParams } from "react-router-dom";
 import parse from "html-react-parser";
@@ -61,3 +61,4 @@ function Post(){
         </div>
     ) : null;
 }
+export default Post
