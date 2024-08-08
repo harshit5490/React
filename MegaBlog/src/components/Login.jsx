@@ -1,16 +1,16 @@
-import React from "react";
+import React,{useState} from "react";
 import { Link,useNavigate } from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux"
+import {useDispatch} from "react-redux"
 import {login as authLogin} from "../store/authSlice"
 import authService from "../appwrite/auth";
 import {Input,Button,Logo} from "./index"
 import {useForm} from "react-hook-form"
 
 function Login(){
-    const [error,SetError] = useSelector("");
+    const [error,SetError] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [register,handleSubmit] = useForm();
+    const {register,handleSubmit} = useForm();
 
     const login = async(data)=> {
         SetError("")

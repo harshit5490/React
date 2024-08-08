@@ -59,7 +59,7 @@ export class Service{
             )
             return true;
         } catch (error) {
-            throw error
+            console.log("error is",error);
             return false;
         }
     }
@@ -72,7 +72,7 @@ export class Service{
                 slug
             )
         } catch (error) {
-            throw error
+            console.log("error is",error);
             return false
         }
     }
@@ -85,7 +85,7 @@ export class Service{
                 queries,
             )
         } catch (error) {
-            throw error
+            console.log("error is",error);
             return false;
         }
     }
@@ -94,14 +94,17 @@ export class Service{
 
     async uploadFile(file){
         try {
-            return await this.storage.createFile(
+            
+            const img =  await this.storage.createFile(
+                
                 conf.appwritBucketId,
-                ID.unique,
-                file,
-            )
+                ID.unique(),
+                file
+            );
+            return img;
         } catch (error) {
-            throw error
-            return false;
+            console.log("error is",error);
+            // return false;
         }
     }
 

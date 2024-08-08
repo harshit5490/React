@@ -6,7 +6,7 @@ import service from "../../appwrite/config";
 import { useSelector } from "react-redux";
 
 export default function PostForm({ post }) {
-    const { register, handleSubmit, watch, control, setValue, getValues } = useForm({
+    const { register, handleSubmit, watch, setValue,control, getValues } = useForm({
         defaultValues: {
             title: post?.title || "",
             slug: post?.$id || "",
@@ -18,6 +18,7 @@ export default function PostForm({ post }) {
     const userData = useSelector((state) => state.auth.userData);
 
     const submit = async (data) => {
+        console.log("form data" ,data);
         if (post) {
             const file = data.image[0] ? await service.uploadFile(data.image[0]) : null;
             if (file) {
@@ -26,13 +27,14 @@ export default function PostForm({ post }) {
             const dbPost = await service.updatePost(post.$id, {
                 ...data,
                 featuredImage: file ? file.$id : undefined,
-            })
+            });
             if (dbPost) {
                 navigate(`/post/${dbPost.$id}`);
             }
         }
         else {
             const file = await service.uploadFile(data.image[0]);
+            console.log(file);
             if (file) {
                 const fileId = file.$id;
                 data.featuredImage = fileId;
@@ -45,19 +47,19 @@ export default function PostForm({ post }) {
     };
 
     const slugTransform = useCallback((value) => {
-        if (value && typeof value === string)
+        if (value && typeof value === "string")
             return value
                 .trim()
                 .toLowerCase()
                 .replace(/[^a-zA-Z\d\s]+/g, "-")
                 .replace(/\s/g, "-")
 
-        return ''
+        return"";
     }, []);
     useEffect(()=>{
         const subscription = watch((value,{name})=>{
             if(name === "title"){
-                setValue("slug",slugTransform(value.title),{shouldValidate : true});
+                setValue("slug",slugTransform(value.title),{shouldValidate : true})
             }
         });
         return ()=>subscription.unsubscribe();
